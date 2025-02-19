@@ -6,22 +6,16 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
-} from 'wagmi/chains';
-import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
+import { chains } from './utlis/chain';
 
 
 const config = getDefaultConfig({
   appName: 'My Nextjs',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: chains,
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
