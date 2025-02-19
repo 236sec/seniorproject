@@ -16,9 +16,6 @@ const avalanche = {
   rpcUrls: {
     default: { http: ['http://127.0.0.1:8545/'] },
   },
-  blockExplorers: {
-    default: { name: 'SnowTrace', url: 'https://snowtrace.io' },
-  },
 } as const satisfies Chain;
 
 

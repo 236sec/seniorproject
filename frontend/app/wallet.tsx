@@ -9,7 +9,7 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
-import { chains } from './utlis/chain';
+import { chains } from './utlis/config/chain';
 
 
 const config = getDefaultConfig({
