@@ -27,12 +27,12 @@ export class PricePointService {
     return this.pricePointModel.find().exec();
   }
 
-  findOne(id: string): Promise<PricePoint | null> {
+  findOne(id: number): Promise<PricePoint | null> {
     return this.pricePointModel.findById(id).exec();
   }
 
   update(
-    id: string,
+    id: number,
     updatePricePointDto: UpdatePricePointDto,
   ): Promise<PricePoint | null> {
     return this.pricePointModel
@@ -42,7 +42,7 @@ export class PricePointService {
       .exec();
   }
 
-  async delete(id: string): Promise<{ message: string }> {
+  async delete(id: number): Promise<{ message: string }> {
     try {
       const result = await this.pricePointModel.findByIdAndDelete(id).exec();
       if (!result) {

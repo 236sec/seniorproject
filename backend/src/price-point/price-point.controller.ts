@@ -40,6 +40,6 @@ export class PricePointController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pricePointService.remove(+id);
+    return this.pricePointService.delete(+id);
   }
 }
