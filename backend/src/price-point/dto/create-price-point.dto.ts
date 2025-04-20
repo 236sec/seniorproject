@@ -1,5 +1,9 @@
+import { IsEmail, IsNotEmpty } from 'class-validator';
+
 export class CreatePricePointDto {
-  readonly name: string;
-  readonly description?: string;
-  readonly price: number;
+  @IsEmail()
+  email: string;
+
+  @IsNotEmpty()
+  name: string;
 }
