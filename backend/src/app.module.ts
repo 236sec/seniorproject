@@ -5,10 +5,15 @@ import { PricePointModule } from './price-point/price-point.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as mongoose from 'mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    ScheduleModule.forRoot(),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
@@ -29,6 +34,7 @@ import * as mongoose from 'mongoose';
       inject: [ConfigService],
     }),
     PricePointModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,41 +1,21 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Param, Delete, Query } from '@nestjs/common';
 import { PricePointService } from './price-point.service';
-import { CreatePricePointDto } from './dto/create-price-point.dto';
-import { UpdatePricePointDto } from './dto/update-price-point.dto';
 
 @Controller('price-point')
 export class PricePointController {
   constructor(private readonly pricePointService: PricePointService) {}
-
-  @Post()
-  create(@Body() createPricePointDto: CreatePricePointDto) {
-    return this.pricePointService.create(createPricePointDto);
-  }
-
   @Get()
   findAll() {
     return this.pricePointService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pricePointService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updatePricePointDto: UpdatePricePointDto,
+  @Get(':coinId')
+  async getCoinPriceHistory(
+    @Param('coinId') coinId: string,
+    @Query('limit') limit?: number,
+    @Query('sort') sort?: 'asc' | 'desc',
   ) {
-    return this.pricePointService.update(+id, updatePricePointDto);
+    return this.pricePointService.findCoin(coinId, limit, sort);
   }
 
   @Delete(':id')

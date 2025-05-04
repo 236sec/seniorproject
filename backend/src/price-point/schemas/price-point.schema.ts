@@ -1,22 +1,34 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ObjectId } from 'mongodb';
 
-export type PricePointDocument = PricePoint & Document;
+export type PriceHistoryDocument = PriceHistory & Document;
 
-@Schema()
-export class PricePoint {
-  @Prop({ type: ObjectId, auto: true })
-  id?: ObjectId;
-
-  @Prop({ type: String, required: true, unique: true })
-  name: string;
-
-  @Prop()
-  description: string;
-
-  @Prop()
-  price: number;
+export enum TimeInterval {
+  MINUTE = 'minute',
+  HOUR = 'hour',
+  DAY = 'day',
+  WEEK = 'week',
+  MONTH = 'month',
 }
 
-export const PricePointSchema = SchemaFactory.createForClass(PricePoint);
+@Schema({ timestamps: false })
+export class PriceHistory extends Document {
+  @Prop({ required: true, index: true })
+  symbol: string;
+
+  @Prop({ required: true, type: Number })
+  price: number;
+
+  @Prop({ required: true, enum: TimeInterval })
+  interval: TimeInterval;
+
+  @Prop({ type: Number, default: 0 })
+  volume: number;
+
+  @Prop({ type: Number })
+  timestamp: number;
+}
+
+export const PriceHistorySchema = SchemaFactory.createForClass(PriceHistory);
+
+PriceHistorySchema.index({ symbol: 1, timestamp: -1 });
