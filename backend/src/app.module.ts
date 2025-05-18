@@ -7,6 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as mongoose from 'mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module';
+import { WalltesModule } from './walltes/walltes.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { UsersModule } from './users/users.module';
     }),
     PricePointModule,
     UsersModule,
+    WalltesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
