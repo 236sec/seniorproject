@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { ConnectBtn } from "./components/connectButton";
-import Profile from "./components/profile";
+import { ConnectBtn } from "@/components/connectButton";
+import Profile from "@/components/profile";
+import PriceChart from "@/components/priceChart";
 
 export default function Home() {
   return (
@@ -117,6 +118,8 @@ export default function Home() {
       </div>
 
       <Profile />
+
+      <PriceChart />
     </div>
   );
 }
