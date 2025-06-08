@@ -1,12 +1,4 @@
-export type GetCoinPriceChartsResponse = {
-  data: {
-    prices: {
-      timestamp: number;
-      price: number;
-    }[];
-  };
-  error?: string;
-};
+export type GetCoinPriceChartsResponse = [number, number][];
 
 export type GetCoinPriceChartsRequest = {
   coinId: string;
