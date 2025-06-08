@@ -1,12 +1,12 @@
 import { Module, Logger } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PricePointModule } from './price-point/price-point.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as mongoose from 'mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module';
+import { GeckoModule } from './gecko/gecko.module';
 
 @Module({
   imports: [
@@ -33,8 +33,8 @@ import { UsersModule } from './users/users.module';
       },
       inject: [ConfigService],
     }),
-    PricePointModule,
     UsersModule,
+    GeckoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
