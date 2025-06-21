@@ -1,19 +1,3 @@
-export interface PriceDataPoint {
-  0: number; // timestamp in milliseconds
-  1: number; // price value
-}
-
-export interface VolumeDataPoint {
-  0: number; // timestamp in milliseconds
-  1: number; // price value
-}
-
-export interface MarketChartResponse {
-  prices: PriceDataPoint[];
-  market_caps: [number, number][]; // [timestamp, market_cap]
-  total_volumes: VolumeDataPoint[]; // [timestamp, volume]
-}
-
 export interface CryptocurrencyData {
   id: string;
   symbol: string;
@@ -50,5 +34,4 @@ export interface CryptocurrencyData {
   price_change_percentage_7d_in_currency: number;
 }
 
-// Alternative interface if the response is directly an array
-export type CryptocurrencyArrayResponse = CryptocurrencyData[];
+export type GetMarketListResponse = CryptocurrencyData[];

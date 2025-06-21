@@ -1,7 +1,6 @@
 "use client";
 import { formatDateByPeriod } from "@/lib/datetime";
 import { useQueryGetPriceGraph } from "@/services/apis/useGetPriceGraph";
-import { PriceChartPeriod } from "@/constants/types/api/market/price-graph";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -10,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   LineChart,
   Line,
@@ -19,13 +18,13 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TimePeriod } from "@/constants/types/api/market/common";
 
 export default function PriceChart() {
-  const [selectedPeriod, setSelectedPeriod] = useState<PriceChartPeriod>(
-    PriceChartPeriod.H24
+  const [selectedPeriod, setSelectedPeriod] = useState<TimePeriod>(
+    TimePeriod.H24
   );
   const [activeTab, setActiveTab] = useState<string>("24h");
 
@@ -38,19 +37,19 @@ export default function PriceChart() {
     setActiveTab(value);
     switch (value) {
       case "24h":
-        setSelectedPeriod(PriceChartPeriod.H24);
+        setSelectedPeriod(TimePeriod.H24);
         break;
       case "7d":
-        setSelectedPeriod(PriceChartPeriod.D7);
+        setSelectedPeriod(TimePeriod.D7);
         break;
       case "1m":
-        setSelectedPeriod(PriceChartPeriod.M1);
+        setSelectedPeriod(TimePeriod.M1);
         break;
       case "1y":
-        setSelectedPeriod(PriceChartPeriod.Y1);
+        setSelectedPeriod(TimePeriod.Y1);
         break;
       default:
-        setSelectedPeriod(PriceChartPeriod.H24);
+        setSelectedPeriod(TimePeriod.H24);
     }
   };
 

@@ -16,4 +16,9 @@ export class GeckoController {
     }
     return this.geckoService.getPriceData(coinId, period);
   }
+
+  @Get('market')
+  async getCoinMarket() {
+    return this.geckoService.getCoinMarket();
+  }
 }

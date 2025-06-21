@@ -2,6 +2,7 @@
 import RainbowKitProviderComponent from "./rainbowkit";
 import TanstackProviderComponent from "./tanstack";
 import WagmiProviderComponent from "./wagmi";
+import { ThemeProvider } from "./theme-provider";
 
 type Props = {
   children: React.ReactNode;
@@ -10,10 +11,17 @@ type Props = {
 
 export default function Providers({ children, cookie }: Props) {
   return (
-    <WagmiProviderComponent cookie={cookie}>
-      <TanstackProviderComponent>
-        <RainbowKitProviderComponent>{children}</RainbowKitProviderComponent>
-      </TanstackProviderComponent>
-    </WagmiProviderComponent>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <WagmiProviderComponent cookie={cookie}>
+        <TanstackProviderComponent>
+          <RainbowKitProviderComponent>{children}</RainbowKitProviderComponent>
+        </TanstackProviderComponent>
+      </WagmiProviderComponent>
+    </ThemeProvider>
   );
 }
