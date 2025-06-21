@@ -1,23 +1,21 @@
 import { ApiPath } from "@/constants/api-path";
-import {
-  GetCoinPriceChartsResponse,
-  PriceChartPeriod,
-} from "@/constants/types/api/market/price-graph";
+import { TimePeriod } from "@/constants/types/api/market/common";
+import { GetCoinPriceChartsResponse } from "@/constants/types/api/market/price-graph";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 
 interface PriceGraphParams {
   coinId?: string; // e.g. 'bitcoin'
-  period?: PriceChartPeriod; // e.g. '24h', '7d', '1m', '1y'
+  period?: TimePeriod; // e.g. '24h', '7d', '1m', '1y'
 }
 
 export const useQueryGetPriceGraph = (
-  { coinId = "bitcoin", period = PriceChartPeriod.H24 }: PriceGraphParams = {},
+  { coinId = "bitcoin", period = TimePeriod.H24 }: PriceGraphParams = {},
   options?: Omit<
     UseQueryOptions<GetCoinPriceChartsResponse, Error>,
     "queryKey" | "queryFn"
   >
 ) => {
-  const baseUrl = ApiPath.Market.BASE;
+  const baseUrl = ApiPath.GECKO.PRICECHART;
   const url = `${baseUrl}/${coinId}?period=${period}`;
 
   return useQuery<GetCoinPriceChartsResponse, Error>({

@@ -1,18 +1,15 @@
+import { TimePeriod } from "@/constants/types/api/market/common";
 import { format } from "date-fns";
-import { PriceChartPeriod } from "@/constants/types/api/market/price-graph";
 
-export function formatDateByPeriod(
-  date: Date,
-  period: PriceChartPeriod
-): string {
+export function formatDateByPeriod(date: Date, period: TimePeriod): string {
   switch (period) {
-    case PriceChartPeriod.H24:
+    case TimePeriod.H24:
       return format(date, "h:mm a");
-    case PriceChartPeriod.D7:
+    case TimePeriod.D7:
       return format(date, "MMM d, h:mm a");
-    case PriceChartPeriod.M1:
+    case TimePeriod.M1:
       return format(date, "MMM d");
-    case PriceChartPeriod.Y1:
+    case TimePeriod.Y1:
       return format(date, "MMM yyyy");
     default:
       return format(date, "MMM d, h:mm a");
