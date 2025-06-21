@@ -12,6 +12,7 @@ async function bootstrap() {
     }),
   });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Backend API')
@@ -21,5 +22,6 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
   await app.listen(process.env.PORT ?? 3000);
+  console.log(`Server is running on port ${process.env.PORT ?? 3000}`);
 }
 bootstrap();
