@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import { ConnectBtn } from "@/components/connectButton";
 import Profile from "@/components/profile";
 import PriceChart from "@/components/priceChart";
 import MarketList from "@/components/marketList";
 import { ThemeToggle } from "@/components/themeToggle";
+import { AlertButton } from "@/components/atom/alertButton";
 
 export default function Home() {
   return (
@@ -125,6 +127,17 @@ export default function Home() {
       <PriceChart />
 
       <MarketList />
+
+      <AlertButton
+        title="Delete Item"
+        type="submit"
+        description="Are you sure you want to delete this item?"
+        onConfirm={() => console.log("Item deleted")}
+        onCancel={() => console.log("Delete canceled")}
+        variant="default"
+      >
+        Delete
+      </AlertButton>
     </div>
   );
 }
