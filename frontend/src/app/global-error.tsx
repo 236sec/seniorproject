@@ -18,13 +18,9 @@ interface GlobalErrorProps {
 }
 
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
-  // Log error for debugging and monitoring
+  // Log error for debugging
   React.useEffect(() => {
     console.error("Global Error:", error);
-
-    // You can integrate with error monitoring services here
-    // Example: Sentry, LogRocket, Bugsnag, etc.
-    // logErrorToService(error);
   }, [error]);
 
   const handleReload = () => {
@@ -40,7 +36,6 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
   };
 
   return (
-    // global-error must include html and body tags
     <html lang="en">
       <head>
         <title>Something went wrong - Error</title>

@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import Providers from "@/providers/providers";
+import { SideBarLayout } from "@/components/SideBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,9 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers cookie={cookie}>{children}</Providers>
+        <Providers cookie={cookie}>
+          <SideBarLayout>{children}</SideBarLayout>
+        </Providers>
       </body>
     </html>
   );

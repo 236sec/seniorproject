@@ -1,7 +1,7 @@
 "use client";
 import { formatDateByPeriod } from "@/lib/datetime";
 import { useQueryGetPriceGraph } from "@/services/apis/useGetPriceGraph";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -75,7 +75,6 @@ export default function PriceChart() {
       const timestamp = new Date(price[0]);
       return {
         timestamp,
-        // Format date string based on the selected period
         date: formatDateByPeriod(timestamp, selectedPeriod),
         price: price[1],
       };
@@ -86,14 +85,9 @@ export default function PriceChart() {
   const chartData = formatChartData();
   const currentPrice = data && data.length > 0 ? data[data.length - 1][1] : 0;
 
-  // Get min and max values for custom domain
   const priceValues = chartData.map((item) => item.price);
-  const minPrice = Math.min(...priceValues) * 0.995; // Add small buffer
+  const minPrice = Math.min(...priceValues) * 0.995;
   const maxPrice = Math.max(...priceValues) * 1.005;
-
-  useEffect(() => {
-    console.log("Chart data:", data);
-  }, [data]);
 
   if (isLoading) return <div>Loading chart data...</div>;
   if (error) return <div>Error loading chart: {error.message}</div>;
