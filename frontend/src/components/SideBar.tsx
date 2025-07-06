@@ -65,6 +65,16 @@ const items = [
     url: "/settings",
     icon: Settings,
   },
+  {
+    title: "Login",
+    url: "/auth/login",
+    icon: User,
+  },
+  {
+    title: "Register",
+    url: "/auth/register",
+    icon: User,
+  },
 ];
 
 function ProfileCard() {
