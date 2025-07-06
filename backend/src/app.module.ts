@@ -7,6 +7,7 @@ import * as mongoose from 'mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module';
 import { GeckoModule } from './gecko/gecko.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { GeckoModule } from './gecko/gecko.module';
     }),
     UsersModule,
     GeckoModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -15,6 +15,7 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Backend API')
     .setDescription('The API description')
     .setVersion('1.0')

@@ -1,14 +1,24 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ObjectIdValidationPipe } from '../utils/pipes/objectId.pipe';
 import { Types } from 'mongoose';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('register')
+  @Public()
+  @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     try {
       const data = await this.usersService.create(createUserDto);
