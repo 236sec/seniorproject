@@ -5,6 +5,9 @@ import "./globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import Providers from "@/providers/providers";
 import { SideBarLayout } from "@/components/SideBar";
+import { UserProvider } from "@/providers/user";
+import { LoadingModal } from "@/components/loading/loadingModal";
+import { ReduxProvider } from "@/providers/redux";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,9 +46,16 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers cookie={cookie}>
-          <SideBarLayout>{children}</SideBarLayout>
-        </Providers>
+        <ReduxProvider>
+          <Providers cookie={cookie}>
+            <UserProvider>
+              <SideBarLayout>
+                {children}
+                <LoadingModal />
+              </SideBarLayout>
+            </UserProvider>
+          </Providers>
+        </ReduxProvider>
       </body>
     </html>
   );

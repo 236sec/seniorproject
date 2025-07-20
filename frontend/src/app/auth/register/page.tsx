@@ -11,13 +11,28 @@ import { z } from "zod";
 import { useRegister } from "@/services/apis/useRegister";
 import { registerSchema } from "@/components/form/register/registerSchema";
 import { RegisterForm } from "@/components/form/register/registerForm";
+import { useUser } from "@/providers/user";
+import { useEffect } from "react";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+      router.refresh();
+    }
+  }, [user, router]);
 
   const registerMutation = useRegister({
     onSuccess: (data) => {
       console.log("Registration successful:", data);
+      setUser({
+        _id: data.user._id,
+        username: data.user.username,
+        email: data.user.email,
+      });
       router.push("/");
       router.refresh();
     },
