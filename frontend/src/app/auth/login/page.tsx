@@ -11,25 +11,23 @@ import { useLogin } from "@/services/apis/useLogin";
 import { LoginForm } from "@/components/form/login/loginForm";
 import { z } from "zod";
 import { loginSchema } from "@/components/form/login/loginSchema";
+import { useLoadingActions } from "@/hooks/useLoadingActions";
 
 export default function LoginPage() {
   const router = useRouter();
-
+  const { showLoading, hideLoading } = useLoadingActions();
   const loginMutation = useLogin({
-    onSuccess: (data) => {
-      console.log("Login successful:", data);
+    onSuccess: () => {
       router.push("/");
       router.refresh();
     },
-    onError: (error) => {
-      console.error("Login failed:", error);
+    onSettled: () => {
+      hideLoading();
     },
   });
 
-  const handleSubmit = async ({
-    email,
-    password,
-  }: z.infer<typeof loginSchema>) => {
+  const handleSubmit = ({ email, password }: z.infer<typeof loginSchema>) => {
+    showLoading("Logging in...");
     loginMutation.mutate({ email, password });
   };
 

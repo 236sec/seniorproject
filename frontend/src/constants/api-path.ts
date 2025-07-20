@@ -9,4 +9,7 @@ export const ApiPath = {
     LOGIN: `${config.apiBaseUrl}/auth/login`,
     REGISTER: `${config.apiBaseUrl}/users`,
   },
+  USER: {
+    PROFILE: `${config.apiBaseUrl}/users/profile`,
+  },
 };

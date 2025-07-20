@@ -8,7 +8,7 @@ interface RegisterRequest {
 
 interface RegisterResponse {
   success: boolean;
-  user?: {
+  user: {
     _id: string;
     email: string;
     username: string;

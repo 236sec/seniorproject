@@ -1,18 +1,14 @@
+import { ApiPath } from "@/constants/api-path";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
+import { TokenService } from "@/services/auth/tokenService";
 
-interface LoginRequest {
+export interface LoginRequest {
   email: string;
   password: string;
 }
 
 interface LoginResponse {
-  success: boolean;
-  user?: {
-    _id: string;
-    email: string;
-    username: string;
-  };
-  message?: string;
+  access_token: string;
 }
 
 export const useLogin = (
@@ -21,10 +17,12 @@ export const useLogin = (
     "mutationFn"
   >
 ) => {
+  const baseUrl = ApiPath.AUTH.LOGIN;
+  const url = `${baseUrl}`;
   return useMutation<LoginResponse, Error, LoginRequest>({
     mutationFn: async (loginData: LoginRequest) => {
       try {
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -40,7 +38,13 @@ export const useLogin = (
           );
         }
 
-        return response.json();
+        const data = await response.json();
+
+        if (data.access_token) {
+          TokenService.setToken(data.access_token);
+        }
+
+        return data;
       } catch (error) {
         console.error("Failed to login:", error);
         throw error instanceof Error
