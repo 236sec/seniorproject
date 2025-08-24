@@ -1,3 +1,10 @@
+import {
+  IsString,
+  IsOptional,
+  IsEnum,
+  IsEthereumAddress,
+} from 'class-validator';
+
 export enum PriceChartPeriod {
   H24 = '24h',
   D7 = '7d',
@@ -5,7 +12,10 @@ export enum PriceChartPeriod {
   Y1 = '1y',
 }
 
-export type GetCoinPriceChartsDto = {
+export class GetCoinPriceChartsDto {
+  @IsString()
   coinId: string;
+
+  @IsEnum(PriceChartPeriod)
   period: PriceChartPeriod;
-};
+}

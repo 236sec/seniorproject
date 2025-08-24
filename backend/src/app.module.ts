@@ -8,6 +8,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module';
 import { GeckoModule } from './gecko/gecko.module';
 import { AuthModule } from './auth/auth.module';
+import { AlchemyModule } from './alchemy/alchemy.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     GeckoModule,
     AuthModule,
+    AlchemyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

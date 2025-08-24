@@ -23,7 +23,7 @@ export class GeckoService {
   ) {}
 
   private API_KEY: string | undefined;
-  private readonly logger = new Logger();
+  private readonly logger = new Logger(GeckoService.name);
 
   onModuleInit() {
     this.API_KEY = this.configService.get<string>('COINGECKO_API_KEY');
